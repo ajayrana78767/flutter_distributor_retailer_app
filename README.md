@@ -1,16 +1,45 @@
-# flutter_distributor_retailer_app
+Distributor & Retailer Management App
 
-A new Flutter project.
+A Flutter app to manage Distributors and Retailers with full CRUD operations, type-based selection, and image upload.
 
-## Getting Started
+Features
 
-This project is a starting point for a Flutter application.
+Add / Update / Delete users (Distributor / Retailer)
 
-A few resources to get you started if this is your first Flutter project:
+Image upload via camera (hidden in edit mode)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Type selection using tabs
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Form validation for all fields
+
+Mock API integration using Dio
+
+Provider state management
+
+Folder Structure
+lib/
+ ├─ core/      # Network, routes, theme, utils
+ ├─ models/    # User model
+ ├─ repository/# API services
+ ├─ viewmodels/# Provider state management
+ ├─ views/     # List & Form screens
+ └─ widgets/   # Reusable widgets
+
+Packages
+
+provider, go_router, google_fonts, image_picker, dio, cupertino_icons
+
+Usage
+
+Select Distributor or Retailer tab on List Screen
+
+Click Add User → fill form → submit
+
+Edit user → form shows existing data (image upload hidden)
+
+Delete user → removes from list
+
+Author
+
+Ajay Kumar – Flutter Developer
+Let's Connect: 7876740036
