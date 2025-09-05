@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_distributor_retailer_app/core/routes/app_routes.dart';
+import 'package:flutter_distributor_retailer_app/models/user_model.dart';
 import 'package:flutter_distributor_retailer_app/views/distributor_form_screen.dart';
 import 'package:flutter_distributor_retailer_app/views/distributor_list_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -20,6 +21,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.add,
       pageBuilder: (context, state) {
+        final extra = state.extra as UserModel?;
         return CustomTransitionPage(
           key: state.pageKey,
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
@@ -36,7 +38,7 @@ final GoRouter appRouter = GoRouter(
                     ),
                 child: child,
               ),
-          child: const DistributorFormScreen(),
+          child: DistributorFormScreen(userModel: extra),
         );
       },
     ),

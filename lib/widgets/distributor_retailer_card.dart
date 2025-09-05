@@ -5,68 +5,99 @@ class DistributorRetailerCard extends StatelessWidget {
   final String title;
   final String location;
   final String status;
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
 
   const DistributorRetailerCard({
     super.key,
     required this.title,
     required this.location,
     required this.status,
+    this.onEdit,
+    this.onDelete,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(24),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(.25),
-            offset: Offset(0, 0),
+            offset: const Offset(0, 0),
             blurRadius: 20,
           ),
         ],
+        borderRadius: BorderRadius.circular(8),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Title
-          Text(
-            title,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-
-          AppSpacingUtils.h8,
-
-          // Location
-          Row(
-            children: [
-              Icon(Icons.location_on, size: 24),
-              AppSpacingUtils.w4,
-              Text(
-                overflow: TextOverflow.ellipsis,
-                location,
-                style: TextStyle(fontSize: 16),
-              ),
-            ],
-          ),
-
-          AppSpacingUtils.h8,
-
-          // Status
-          Row(
-            children: [
-              Text('Status:', style: TextStyle(fontWeight: FontWeight.w500)),
-              AppSpacingUtils.w8,
-              Text(
-                'Active',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: Color.fromRGBO(92, 195, 160, 1),
+          // Left column: details
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
+                AppSpacingUtils.h8,
+                Row(
+                  children: [
+                    const Icon(Icons.location_on, size: 20),
+                    AppSpacingUtils.w4,
+                    Expanded(
+                      child: Text(
+                        location,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ],
+                ),
+                AppSpacingUtils.h8,
+                Row(
+                  children: [
+                    const Text(
+                      'Status:',
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    AppSpacingUtils.w8,
+                    Text(
+                      status,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: status.toLowerCase() == 'active'
+                            ? const Color.fromRGBO(92, 195, 160, 1)
+                            : Colors.red,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          // Right: vertical three dots menu
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.more_vert),
+            onSelected: (value) {
+              if (value == 'edit') {
+                if (onEdit != null) onEdit!();
+              } else if (value == 'delete') {
+                if (onDelete != null) onDelete!();
+              }
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(value: 'edit', child: Text('Edit')),
+              const PopupMenuItem(value: 'delete', child: Text('Delete')),
             ],
           ),
         ],

@@ -52,5 +52,16 @@ class AppTheme {
 
     // Text Theme
     textTheme: GoogleFonts.poppinsTextTheme(),
+
+    // Progress Indicator Theme
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: Colors.black,
+    ),
+
+    // Dialog background color
+    dialogBackgroundColor: Colors.white,
+
+    // Popup Menu theme
+    popupMenuTheme: PopupMenuThemeData(color: Colors.white),
   );
 }
